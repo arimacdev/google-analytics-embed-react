@@ -1,0 +1,13 @@
+{
+    "name": "google-analytics-embed-react",
+    "private": true,
+    "workspaces": {
+        "packages": [
+            "packages/*",
+            "sites/*"
+        ]
+    },
+    "devDependencies": {
+        "mkdirp": "^1.0.4"
+    }
+}

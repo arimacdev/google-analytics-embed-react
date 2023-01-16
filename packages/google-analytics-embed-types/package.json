@@ -1,0 +1,29 @@
+{
+  "name": "google-analytics-embed-types",
+  "version": "0.0.1",
+  "description": "Type definitions for google analytics embed API",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arimacdev/google-analytics-embed-react.git"
+  },
+  "keywords": [
+    "typescript",
+    "google",
+    "analytics",
+    "gapi",
+    "types"
+  ],
+  "author": "WhizSid <whizsid@aol.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/arimacdev/google-analytics-embed-react/issues"
+  },
+  "homepage": "https://github.com/arimacdev/google-analytics-embed-react#readme",
+  "dependencies": {
+    "@types/google.visualization": "^0.0.68"
+  },
+  "devDependencies": {
+    "@definitelytyped/dtslint": "^0.0.142"
+  }
+}

@@ -1,0 +1,9 @@
+service_account_key.json
+oauth_key.json
+node_modules/
+sites/*/node_modules
+sites/*/dist
+sites/*/package-lock.json
+packages/*/node_modules
+packages/*/dist
+packages/*/package-lock.json
