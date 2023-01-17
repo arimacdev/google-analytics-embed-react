@@ -63,11 +63,9 @@ declare namespace gapi.analytics {
     execute(): void;
   }
 
-  interface Query {
-    [x: string]: string;
-  }
+  type Query = Record<string, string>;
 
-  namespace report {
+  export namespace report {
     export interface DataOptions {
       query: Query;
     }
@@ -80,20 +78,20 @@ declare namespace gapi.analytics {
     }
   }
 
-  namespace googleCharts {
-    export interface ChartOptions<T> {
-      type: "LINE";
+  export namespace googleCharts {
+    export interface ChartOptions<T, O> {
+      type: T;
       container: string | HTMLElement;
-      options: T;
+      options: O;
     }
     export interface DataChartOptions {
       query: Query;
       chart:
-        | ChartOptions<google.visualization.LineChartOptions>
-        | ChartOptions<google.visualization.ColumnChartOptions>
-        | ChartOptions<google.visualization.BarChartOptions>
-        | ChartOptions<google.visualization.TableOptions>
-        | ChartOptions<google.visualization.GeoChartOptions>;
+        | ChartOptions<"LINE", google.visualization.LineChartOptions>
+        | ChartOptions<"COLUMN", google.visualization.ColumnChartOptions>
+        | ChartOptions<"BAR", google.visualization.BarChartOptions>
+        | ChartOptions<"TABLE", google.visualization.TableOptions>
+        | ChartOptions<"GEO", google.visualization.GeoChartOptions>;
     }
 
     export interface DataChartSuccessResult {

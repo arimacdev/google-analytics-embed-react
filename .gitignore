@@ -4,6 +4,10 @@ node_modules/
 sites/*/node_modules
 sites/*/dist
 sites/*/package-lock.json
+sites/*/yarn.lock
 packages/*/node_modules
 packages/*/dist
 packages/*/package-lock.json
+packages/*/yarn.lock
+package-lock.json
+yarn.lock

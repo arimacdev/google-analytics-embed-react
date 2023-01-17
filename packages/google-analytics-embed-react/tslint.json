@@ -4,7 +4,6 @@
   "rules": {
     "deprecation": true,
     "expect": true,
-    "file-name-casing": false,
     "no-boolean-literal-compare": false,
     "no-empty-interface": false,
     "no-object-literal-type-assertion": false,

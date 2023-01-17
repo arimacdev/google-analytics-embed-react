@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
+        "module": "CommonJS",
         "lib": [
             "es6",
             "dom"
@@ -10,7 +10,7 @@
         "strictNullChecks": true,
         "strictFunctionTypes": true,
         "baseUrl": "./",
-        "types": [],
+        "types": ["google.visualization"],
         "noEmit": true,
         "forceConsistentCasingInFileNames": true
     },

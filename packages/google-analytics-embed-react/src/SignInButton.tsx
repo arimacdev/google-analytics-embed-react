@@ -1,7 +1,8 @@
-import { googleContext } from "./GoogleAnalyticsContext";
-import * as React from "react";
+import * as React from 'react';
+import GoogleAnalyticsContext, { GoogleAnalyticsContextContent } from './GoogleAnalyticsContext';
 
 class SignInButton extends React.Component {
+  static contextType = GoogleAnalyticsContext;
   protected container: React.RefObject<HTMLDivElement>;
 
   constructor(props: any) {
@@ -11,7 +12,8 @@ class SignInButton extends React.Component {
   }
 
   componentDidMount() {
-    googleContext.setAuthButton(this.container.current as HTMLElement);
+    const [_, setAuthButton] = this.context as GoogleAnalyticsContextContent;
+    setAuthButton(this.container.current as HTMLElement);
   }
 
   render(): React.ReactNode {

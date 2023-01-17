@@ -1,8 +1,15 @@
 {
   "name": "google-analytics-embed-types",
   "version": "0.0.1",
-  "description": "Type definitions for google analytics embed API",
-  "scripts": {},
+  "types": "index.d.ts",
+  "main": "",
+  "description": "Type definitions for Google Analytics Embed Components",
+  "scripts": {
+    "prettier:check": "prettier --check index.d.ts",
+    "prettier:fix": "prettier --write index.d.ts",
+    "lint:check": "eslint index.d.ts",
+    "lint:fix": "eslint --fix index.d.ts"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/arimacdev/google-analytics-embed-react.git"
@@ -24,6 +31,7 @@
     "@types/google.visualization": "^0.0.68"
   },
   "devDependencies": {
-    "@definitelytyped/dtslint": "^0.0.142"
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-config-standard-with-typescript": "^27.0.1"
   }
 }

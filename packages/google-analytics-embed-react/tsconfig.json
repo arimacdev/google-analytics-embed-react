@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
+    "declaration": true,
     "target": "ESNext",
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "types": ["google-analytics-embed-types", "google.visualization"],
     "allowJs": false,
     "skipLibCheck": true,
-    "esModuleInterop": false,
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
@@ -13,8 +15,8 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "noEmit": true,
+    "outDir": "dist",
     "jsx": "react-jsx"
   },
-  "include": ["src", "types/gapi-analytics.d.ts"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "exclude": ["node_modules", "dist"]
 }
