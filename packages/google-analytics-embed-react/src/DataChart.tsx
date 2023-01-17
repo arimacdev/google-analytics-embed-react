@@ -2,7 +2,12 @@ import * as React from 'react';
 import GoogleAnalyticsContext, { GoogleAnalyticsContextContent } from './GoogleAnalyticsContext';
 
 export type DataChartProps<T> = {
-  query: any;
+  /** Query */
+  query: gapi.analytics.Query;
+  /** Placeholder if a user not authenticated yet */
+  children?: React.ReactNode;
+  /** Styles to the container element */
+  style?: React.CSSProperties;
 } & T;
 
 export default class DataChart<O> extends React.Component<DataChartProps<O>> {
@@ -20,8 +25,10 @@ export default class DataChart<O> extends React.Component<DataChartProps<O>> {
 
   componentDidUpdate() {
     const [gaState, _] = this.context as GoogleAnalyticsContextContent;
-    const { query, ...chartOptions } = this.props;
+    const { query, children, style, ...chartOptions } = this.props;
+    // Rendering the component only if a user authenticated
     if (gaState == 'AUTH_SUCCESS') {
+      // Updating the existing chart with new options if already rendered
       if (this.googleDataChart) {
         this.googleDataChart.set({
           query,
@@ -32,6 +39,7 @@ export default class DataChart<O> extends React.Component<DataChartProps<O>> {
           }
         });
       } else {
+        // Creating a chart if a chart instance not created
         this.googleDataChart = new gapi.analytics.googleCharts.DataChart({
           query,
           chart: {
@@ -43,11 +51,14 @@ export default class DataChart<O> extends React.Component<DataChartProps<O>> {
         this.googleDataChart.execute();
       }
     } else if (this.googleDataChart) {
+      // Destroying the chart if the authentication method changed
       this.googleDataChart = null;
     }
   }
 
   render(): React.ReactNode {
-    return <div ref={this.elementRef}></div>;
+    return (
+      <div ref={this.elementRef}>{!this.googleDataChart ? this.props.children : undefined}</div>
+    );
   }
 }

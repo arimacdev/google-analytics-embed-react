@@ -33,6 +33,11 @@ export interface GoogleAnalyticsProviderProps {
   userInfoLabel?: string;
 }
 
+/**
+ * Wrap your application logics with this provider. This provider will
+ * load the google platform script and notify the child components about
+ * authentication events
+ */
 const GoogleAnalyticsProvider: React.FC<GoogleAnalyticsProviderProps> = (
   props: GoogleAnalyticsProviderProps
 ): React.ReactElement => {
@@ -87,8 +92,6 @@ const GoogleAnalyticsProvider: React.FC<GoogleAnalyticsProviderProps> = (
           scopes: props.scopes,
           overwriteDefaultScopes: props.overwriteDefaultScopes
         });
-        // TODO: Currently google not returning any error if the server access token is invalid.
-        // Need to do a little research to handle it.
         setGaState('AUTH_SUCCESS');
       } else if (props.clientId && authButton) {
         // button authorization

@@ -1,6 +1,7 @@
 import {
   GoogleAnalyticsLineChart,
   GoogleAnalyticsProvider,
+  ViewSelector,
 } from "google-analytics-embed-react";
 import * as React from "react";
 import axios from "axios";
@@ -22,7 +23,7 @@ function App() {
           <hr />
           <GoogleAnalyticsLineChart
             query={{
-              ids: "ga:283101882", // <-- Replace with the ids value for your view.
+              ids: "ga:000000", // <-- Replace with the ids value for your view.
               "start-date": "90daysAgo",
               "end-date": "today",
               metrics: "ga:sessions,ga:users",
@@ -30,6 +31,7 @@ function App() {
             }}
             width={500}
           />
+          <ViewSelector />
         </div>
       </GoogleAnalyticsProvider>
     </div>
