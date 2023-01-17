@@ -3,20 +3,14 @@ import GoogleAnalyticsContext, { GoogleAnalyticsState } from './GoogleAnalyticsC
 
 export interface GoogleAnalyticsProviderProps {
   children: React.ReactNode;
-  /** The client ID of your project in the developers console. */
-  clientId?: string;
   /**
-   * If you already have a valid access token, you can pass it
-   * to the authorize method directly and the user will not be
-   * prompted to authorize.
+   * Access token to authorize to the analytics service.
    */
   accessToken?: string;
-  /** Firing when a user failed to authenticate using the sign in button */
-  onAuthError?: () => {};
-  /** Firing when a user authenticated using the sign in button */
-  onAuthSuccess?: () => {};
   /** Firing after the gapi script loaded and ready to use **/
-  onReady?: () => {};
+  onReady?: () => void;
+  /** Firing after the authenitcated to analytics service using access token **/
+  onAuthenticated?: () => void;
   /** A list of Google API auth scopes that your application is requesting **/
   scopes?: string[];
   /**
@@ -41,10 +35,10 @@ export interface GoogleAnalyticsProviderProps {
 const GoogleAnalyticsProvider: React.FC<GoogleAnalyticsProviderProps> = (
   props: GoogleAnalyticsProviderProps
 ): React.ReactElement => {
-  // For frontend authentication
-  const [authButton, setAuthButton] = React.useState<null | HTMLElement>(null);
   // Internal state
   const [gaState, setGaState] = React.useState<GoogleAnalyticsState>('INITIALIZED');
+
+  const { onReady, onAuthenticated } = props;
   // Importing the google platform script and
   React.useEffect(() => {
     if (document.getElementById('gaScript') == null) {
@@ -75,6 +69,7 @@ const GoogleAnalyticsProvider: React.FC<GoogleAnalyticsProviderProps> = (
     if (gaState == 'PROCESSING') {
       window.gapi.analytics.ready(() => {
         setGaState('READY');
+        onReady != null && onReady();
       });
     }
   }, [gaState]);
@@ -93,33 +88,12 @@ const GoogleAnalyticsProvider: React.FC<GoogleAnalyticsProviderProps> = (
           overwriteDefaultScopes: props.overwriteDefaultScopes
         });
         setGaState('AUTH_SUCCESS');
-      } else if (props.clientId && authButton) {
-        // button authorization
-        setGaState('AUTHENTICATING');
-        gapi.analytics.auth.authorize({
-          clientid: props.clientId,
-          container: authButton,
-          userInfoLabel: props.userInfoLabel,
-          scopes: props.scopes,
-          overwriteDefaultScopes: props.overwriteDefaultScopes
-        });
-
-        gapi.analytics.auth.on('signIn', () => {
-          setGaState('AUTH_SUCCESS');
-        });
-
-        gapi.analytics.auth.on('signOut', () => {
-          setGaState('SIGNOUT');
-        });
-
-        gapi.analytics.auth.on('error', () => {
-          setGaState('AUTH_ERROR');
-        });
+        onAuthenticated != null && onAuthenticated();
       }
     }
-  }, [props.accessToken, props.clientId, gaState, authButton]);
+  }, [props.accessToken, gaState]);
   return (
-    <GoogleAnalyticsContext.Provider value={[gaState, setAuthButton]}>
+    <GoogleAnalyticsContext.Provider value={gaState}>
       <div>{props.children}</div>
     </GoogleAnalyticsContext.Provider>
   );

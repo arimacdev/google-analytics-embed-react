@@ -1,7 +1,5 @@
 declare namespace gapi.analytics {
-  export interface Response {
-    [x: string]: any;
-  }
+  export type Response = Record<string, any>;
 
   export interface AuthOptions {
     clientid?: string;

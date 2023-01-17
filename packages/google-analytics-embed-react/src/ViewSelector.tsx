@@ -1,5 +1,5 @@
 import * as React from 'react';
-import GoogleAnalyticsContext, { GoogleAnalyticsContextContent } from './GoogleAnalyticsContext';
+import GoogleAnalyticsContext, { GoogleAnalyticsState } from './GoogleAnalyticsContext';
 
 export interface ViewSelectorProps {
   /** Callback to fire after user changed the view */
@@ -18,7 +18,7 @@ export interface ViewSelectorProps {
  */
 export default class ViewSelector extends React.Component<ViewSelectorProps> {
   public static contextType = GoogleAnalyticsContext;
-  private elementRef: React.RefObject<HTMLDivElement>;
+  private readonly elementRef: React.RefObject<HTMLDivElement>;
   private googleViewSelector: gapi.analytics.ViewSelector | null;
 
   constructor(props: ViewSelectorProps) {
@@ -29,18 +29,18 @@ export default class ViewSelector extends React.Component<ViewSelectorProps> {
   }
 
   componentDidUpdate() {
-    const [gaState, _] = this.context as GoogleAnalyticsContextContent;
+    const gaState = this.context as GoogleAnalyticsState;
     if (gaState == 'AUTH_SUCCESS') {
-      if (!this.googleViewSelector) {
+      if (this.googleViewSelector == null) {
         this.googleViewSelector = new gapi.analytics.ViewSelector({
           container: this.elementRef.current as HTMLElement
         });
         this.googleViewSelector.execute();
-        if (this.props.onChange) {
+        if (this.props.onChange != null) {
           this.googleViewSelector.on('change', this.props.onChange);
         }
       }
-    } else if (this.googleViewSelector) {
+    } else if (this.googleViewSelector != null) {
       this.googleViewSelector = null;
     }
   }
@@ -48,7 +48,7 @@ export default class ViewSelector extends React.Component<ViewSelectorProps> {
   render(): React.ReactNode {
     return (
       <div style={this.props.style} className={this.props.className} ref={this.elementRef}>
-        {!this.googleViewSelector ? this.props.children : undefined}
+        {this.googleViewSelector == null ? this.props.children : undefined}
       </div>
     );
   }

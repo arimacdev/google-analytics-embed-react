@@ -1,5 +1,5 @@
 import * as React from 'react';
-import GoogleAnalyticsContext, { GoogleAnalyticsContextContent } from './GoogleAnalyticsContext';
+import GoogleAnalyticsContext, { GoogleAnalyticsState } from './GoogleAnalyticsContext';
 
 export type DataChartProps<T> = {
   /** Query */
@@ -24,12 +24,12 @@ export default class DataChart<O> extends React.Component<DataChartProps<O>> {
   }
 
   componentDidUpdate() {
-    const [gaState, _] = this.context as GoogleAnalyticsContextContent;
+    const gaState = this.context as GoogleAnalyticsState;
     const { query, children, style, ...chartOptions } = this.props;
     // Rendering the component only if a user authenticated
     if (gaState == 'AUTH_SUCCESS') {
       // Updating the existing chart with new options if already rendered
-      if (this.googleDataChart) {
+      if (this.googleDataChart != null) {
         this.googleDataChart.set({
           query,
           chart: {
@@ -50,7 +50,7 @@ export default class DataChart<O> extends React.Component<DataChartProps<O>> {
         });
         this.googleDataChart.execute();
       }
-    } else if (this.googleDataChart) {
+    } else if (this.googleDataChart != null) {
       // Destroying the chart if the authentication method changed
       this.googleDataChart = null;
     }
@@ -58,7 +58,9 @@ export default class DataChart<O> extends React.Component<DataChartProps<O>> {
 
   render(): React.ReactNode {
     return (
-      <div ref={this.elementRef}>{!this.googleDataChart ? this.props.children : undefined}</div>
+      <div ref={this.elementRef}>
+        {this.googleDataChart == null ? this.props.children : undefined}
+      </div>
     );
   }
 }

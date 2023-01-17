@@ -1,9 +1,8 @@
+import { default as DataChart, DataChartProps } from './DataChart';
 export {
   default as GoogleAnalyticsProvider,
   GoogleAnalyticsProviderProps
 } from './GoogleAnalyticsProvider';
-export { default as SignInButton } from './SignInButton';
-import { default as DataChart, DataChartProps } from './DataChart';
 export { DataChartProps } from './DataChart';
 export { default as ViewSelector, ViewSelectorProps } from './ViewSelector';
 
