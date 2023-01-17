@@ -1,24 +1,39 @@
 {
   "name": "react-backend-auth",
+  "version": "0.1.0",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
-  },
   "dependencies": {
-    "google-analytics-embed-react": "file:../../packages/google-analytics-embed-react/dist/",
+    "@types/react": "^18.0.26",
+    "@types/react-dom": "^18.0.10",
+    "google-analytics-embed-react": "file:../../packages/google-analytics-embed-react",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "axios": "1.2.2"
   },
   "devDependencies": {
-    "@types/react": "^18.0.26",
-    "@types/react-dom": "^18.0.9",
-    "@vitejs/plugin-react": "^3.0.0",
-    "typescript": "^4.9.3",
-    "vite": "^4.0.0"
+    "env-cmd": "^10.1.0",
+    "react-scripts": "5.0.1",
+    "typescript": "^4.9.4"
+  },
+  "scripts": {
+    "start": "node util/set_client_id_env.js && env-cmd react-scripts start",
+    "build": "node util/set_client_id_env.js && env-cmd react-scripts build"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

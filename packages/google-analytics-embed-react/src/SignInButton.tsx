@@ -13,7 +13,7 @@ class SignInButton extends React.Component {
 
   componentDidMount() {
     const [_, setAuthButton] = this.context as GoogleAnalyticsContextContent;
-    setAuthButton(this.container.current as HTMLElement);
+      setAuthButton(this.container.current as HTMLElement);
   }
 
   render(): React.ReactNode {

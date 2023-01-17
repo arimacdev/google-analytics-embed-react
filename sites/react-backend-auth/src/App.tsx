@@ -1,14 +1,14 @@
-import axios from "axios";
 import {
+  GoogleAnalyticsLineChart,
   GoogleAnalyticsProvider,
-  SignInButton,
 } from "google-analytics-embed-react";
-import { useEffect, useState } from "react";
+import * as React from "react";
+import axios from "axios";
 
 function App() {
-  const [accessToken, setAccessToken] = useState<null | string>(null);
+  const [accessToken, setAccessToken] = React.useState<null | string>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     axios.get("http://localhost:8001/obtain-access-token").then((res) => {
       setAccessToken(res.data.access_token);
     });
@@ -20,7 +20,16 @@ function App() {
         <div>
           My Analytics Component
           <hr />
-          <SignInButton />
+          <GoogleAnalyticsLineChart
+            query={{
+              ids: "ga:283101882", // <-- Replace with the ids value for your view.
+              "start-date": "90daysAgo",
+              "end-date": "today",
+              metrics: "ga:sessions,ga:users",
+              dimensions: "ga:date",
+            }}
+            width={500}
+          />
         </div>
       </GoogleAnalyticsProvider>
     </div>

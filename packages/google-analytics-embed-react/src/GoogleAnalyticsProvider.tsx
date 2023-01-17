@@ -40,7 +40,6 @@ const GoogleAnalyticsProvider: React.FC<GoogleAnalyticsProviderProps> = (
   const [authButton, setAuthButton] = React.useState<null | HTMLElement>(null);
   // Internal state
   const [gaState, setGaState] = React.useState<GoogleAnalyticsState>('INITIALIZED');
-
   // Importing the google platform script and
   React.useEffect(() => {
     if (document.getElementById('gaScript') == null) {
@@ -116,7 +115,6 @@ const GoogleAnalyticsProvider: React.FC<GoogleAnalyticsProviderProps> = (
       }
     }
   }, [props.accessToken, props.clientId, gaState, authButton]);
-
   return (
     <GoogleAnalyticsContext.Provider value={[gaState, setAuthButton]}>
       <div>{props.children}</div>
