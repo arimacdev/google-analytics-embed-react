@@ -1,13 +1,42 @@
 {
     "name": "google-analytics-embed-react",
+    "scripts": {
+        "all:lint:fix": "npm run backend:lint:fix && npm run backend_auth:lint:fix && npm run frontend_auth:lint:fix && npm run reactlib:lint:fix && npm run typeslib:lint:fix",
+        "all:lint:check": "npm run backend:lint:check && npm run backend_auth:lint:check && npm run frontend_auth:lint:check && npm run reactlib:lint:check && npm run typeslib:lint:check",
+        "backend:lint:fix": "npm run lint:fix --workspace sites/express-backend",
+        "backend:lint:check": "npm run lint:check --workspace sites/express-backend",
+        "backend_auth:lint:fix": "npm run lint:fix --workspace sites/react-backend-auth",
+        "backend_auth:lint:check": "npm run lint:check --workspace sites/react-backend-auth",
+        "frontend_auth:lint:fix": "npm run lint:fix --workspace sites/react-frontend-auth",
+        "frontend_auth:lint:check": "npm run lint:check --workspace sites/react-frontend-auth",
+        "reactlib:lint:fix": "npm run lint:fix --workspace packages/google-analytics-embed-react",
+        "reactlib:lint:check": "npm run lint:check --workspace packages/google-analytics-embed-react",
+        "typeslib:lint:fix": "npm run lint:fix --workspace packages/google-analytics-embed-types",
+        "typeslib:lint:check": "npm run lint:check --workspace packages/google-analytics-embed-types",
+        "all:prettier:fix": "npm run backend:prettier:fix && npm run backend_auth:prettier:fix && npm run frontend_auth:prettier:fix && npm run reactlib:prettier:fix && npm run typeslib:prettier:fix",
+        "all:prettier:check": "npm run backend:prettier:check && npm run backend_auth:prettier:check && npm run frontend_auth:prettier:check && npm run reactlib:prettier:check && npm run typeslib:prettier:check",
+        "backend:prettier:fix": "npm run prettier:fix --workspace sites/express-backend",
+        "backend:prettier:check": "npm run prettier:check --workspace sites/express-backend",
+        "backend_auth:prettier:fix": "npm run prettier:fix --workspace sites/react-backend-auth",
+        "backend_auth:prettier:check": "npm run prettier:check --workspace sites/react-backend-auth",
+        "frontend_auth:prettier:fix": "npm run prettier:fix --workspace sites/react-frontend-auth",
+        "frontend_auth:prettier:check": "npm run prettier:check --workspace sites/react-frontend-auth",
+        "reactlib:prettier:fix": "npm run prettier:fix --workspace packages/google-analytics-embed-react",
+        "reactlib:prettier:check": "npm run prettier:check --workspace packages/google-analytics-embed-react",
+        "typeslib:prettier:fix": "npm run prettier:fix --workspace packages/google-analytics-embed-types",
+        "typeslib:prettier:check": "npm run prettier:check --workspace packages/google-analytics-embed-types",
+        "backend:start": "npm run start --workspace sites/express-backend",
+        "backend_auth:start": "npm run start --workspace sites/react-backend-auth",
+        "backend_auth:build": "npm run build --workspace sites/react-backend-auth",
+        "frontend_auth:start": "npm run start --workspace sites/react-frontend-auth",
+        "frontend_auth:build": "npm run build --workspace sites/react-frontend-auth",
+        "reactlib:build": "npm run build --workspace packages/google-analytics-embed-react"
+    },
     "private": true,
     "workspaces": {
         "packages": [
             "packages/*",
             "sites/*"
         ]
-    },
-    "devDependencies": {
-        "mkdirp": "^1.0.4"
     }
 }

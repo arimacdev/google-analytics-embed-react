@@ -1,10 +1,20 @@
 {
   "name": "google-analytics-embed-react",
+  "description": "Bringing the Google Analytics Embed Components for your ReactJS application",
   "version": "0.0.1",
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arimacdev/google-analytics-embed-react.git"
+  },
+  "author": {
+      "name": "WhizSid",
+      "url": "https://github.com/whizsid",
+      "email": "whizsid@aol.com"
+  },
   "scripts": {
     "build": "rollup -c --bundleConfigAsCjs",
     "prettier:check": "prettier --check src/*",
@@ -16,8 +26,8 @@
     "@rollup/plugin-commonjs": "^24.0.0",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@types/google.visualization": "^0.0.68",
-    "@types/react": "*",
-    "@types/react-dom": "*",
+    "@types/react": "^18.0",
+    "@types/react-dom": "^18.0",
     "@typescript-eslint/eslint-plugin": "^5.48.2",
     "eslint": "^8.32.0",
     "eslint-config-prettier": "^8.6.0",
@@ -26,7 +36,7 @@
     "eslint-plugin-n": "^15.6.1",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.32.0",
-    "google-analytics-embed-types": "file:../google-analytics-embed-types",
+    "google-analytics-embed-types": "0.0.1",
     "prettier": "2.8",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-typescript2": "^0.34.1",

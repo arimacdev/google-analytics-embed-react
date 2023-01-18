@@ -16,8 +16,7 @@ export interface ViewSelectorProps {
  * ViewSelector component will allow users to select their GA views.
  * onChange method will fire after a user changed the view
  */
-export default class ViewSelector extends React.Component<ViewSelectorProps> {
-  public static contextType = GoogleAnalyticsContext;
+class ViewSelector extends React.Component<ViewSelectorProps> {
   private readonly elementRef: React.RefObject<HTMLDivElement>;
   private googleViewSelector: gapi.analytics.ViewSelector | null;
 
@@ -28,9 +27,9 @@ export default class ViewSelector extends React.Component<ViewSelectorProps> {
     this.googleViewSelector = null;
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(): void {
     const gaState = this.context as GoogleAnalyticsState;
-    if (gaState == 'AUTH_SUCCESS') {
+    if (gaState === 'AUTH_SUCCESS') {
       if (this.googleViewSelector == null) {
         this.googleViewSelector = new gapi.analytics.ViewSelector({
           container: this.elementRef.current as HTMLElement
@@ -53,3 +52,6 @@ export default class ViewSelector extends React.Component<ViewSelectorProps> {
     );
   }
 }
+
+ViewSelector.contextType = GoogleAnalyticsContext;
+export default ViewSelector;

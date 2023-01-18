@@ -1,4 +1,4 @@
-import { default as DataChart, DataChartProps } from './DataChart';
+import DataChart, { DataChartProps } from './DataChart';
 export {
   default as GoogleAnalyticsProvider,
   GoogleAnalyticsProviderProps
@@ -34,9 +34,45 @@ export class GoogleAnalyticsGeoChart extends DataChart<GeoChartOptions> {
   }
 }
 
+export type PieChartOptions = google.visualization.PieChartOptions;
+export class GoogleAnalyticsPieChart extends DataChart<PieChartOptions> {
+  constructor(props: DataChartProps<PieChartOptions>) {
+    super('PIE', props);
+  }
+}
+
 export type TableOptions = google.visualization.TableOptions;
 export class GoogleAnalyticsTable extends DataChart<TableOptions> {
   constructor(props: DataChartProps<TableOptions>) {
     super('TABLE', props);
   }
 }
+
+export type DataChartSuccessResult = gapi.analytics.googleCharts.DataChartSuccessResult;
+
+export type Query = gapi.analytics.Query;
+export type SuccessResponse = gapi.analytics.SuccessResponse;
+export type ErrorResponse = gapi.analytics.ErrorResponse;
+
+/**
+ * Manually fetching a data by using a query. This function will return a promise.
+ * Once it resolved you can get a SuccessResponse. Otherwise you will get
+ * an ErrorResponse. This method will not guarantee that the gapi API is loaded
+ * when you are calling the API. So do not use this until the entire site loaded.
+ */
+export const fetchData = async (query: Query): Promise<SuccessResponse> => {
+  return await new Promise(function (resolve, reject) {
+    gapi.analytics.ready(() => {
+      let data: gapi.analytics.report.Data | null = new gapi.analytics.report.Data({ query });
+      data.once('success', (res) => {
+        data = null;
+        resolve(res);
+      });
+      data.once('error', (res) => {
+        data = null;
+        reject(res);
+      });
+      data.execute();
+    });
+  });
+};

@@ -21,7 +21,11 @@
     "gapi",
     "types"
   ],
-  "author": "WhizSid <whizsid@aol.com>",
+  "author": {
+      "name": "WhizSid",
+      "url": "https://github.com/whizsid",
+      "email": "whizsid@aol.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/arimacdev/google-analytics-embed-react/issues"

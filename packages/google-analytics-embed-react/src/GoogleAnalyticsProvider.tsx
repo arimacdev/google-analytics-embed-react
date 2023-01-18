@@ -20,11 +20,6 @@ export interface GoogleAnalyticsProviderProps {
    * ones specified by the scopes option.
    */
   overwriteDefaultScopes?: boolean;
-  /**
-   * The text to display before a logged in user's email address.
-   * Defaults to 'You are logged in as: '.
-   */
-  userInfoLabel?: string;
 }
 
 /**
@@ -43,6 +38,7 @@ const GoogleAnalyticsProvider: React.FC<GoogleAnalyticsProviderProps> = (
   React.useEffect(() => {
     if (document.getElementById('gaScript') == null) {
       setGaState('LOADING');
+      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
       const g = window.gapi || (window.gapi = {} as any);
       g.analytics = {
         q: [],
@@ -55,10 +51,10 @@ const GoogleAnalyticsProvider: React.FC<GoogleAnalyticsProviderProps> = (
       js.src = 'https://apis.google.com/js/platform.js';
       js.id = 'gaScript';
       fs.parentNode?.insertBefore(js, fs);
-      js.onload = () => {
+      js.addEventListener('load', () => {
         (g as any).load('analytics');
         setGaState('PROCESSING');
-      };
+      });
     } else {
       setGaState('PROCESSING');
     }
@@ -66,17 +62,17 @@ const GoogleAnalyticsProvider: React.FC<GoogleAnalyticsProviderProps> = (
 
   // Waiting until the google script is ready
   React.useEffect(() => {
-    if (gaState == 'PROCESSING') {
+    if (gaState === 'PROCESSING') {
       window.gapi.analytics.ready(() => {
         setGaState('READY');
-        onReady != null && onReady();
+        onReady?.();
       });
     }
   }, [gaState]);
 
   React.useEffect(() => {
-    if (gaState == 'READY') {
-      if (props.accessToken) {
+    if (gaState === 'READY') {
+      if (props.accessToken != null) {
         // server authorization
         setGaState('AUTHENTICATING');
 
@@ -88,7 +84,7 @@ const GoogleAnalyticsProvider: React.FC<GoogleAnalyticsProviderProps> = (
           overwriteDefaultScopes: props.overwriteDefaultScopes
         });
         setGaState('AUTH_SUCCESS');
-        onAuthenticated != null && onAuthenticated();
+        onAuthenticated?.();
       }
     }
   }, [props.accessToken, gaState]);

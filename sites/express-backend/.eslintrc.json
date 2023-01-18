@@ -1,0 +1,22 @@
+{
+    "env": {
+        "node": true,
+        "es6": true
+    },
+    "extends": [
+        "prettier"
+    ],
+    "overrides": [
+    ],
+    "settings": {
+    },
+    "parserOptions": {
+        "sourceType": "script"
+    },
+    "plugins": [
+        "commonjs"
+    ],
+    "rules": {
+        "commonjs/no-duplicate-exports": 2
+    }
+}

@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "prettier:check": "prettier --check server.js",
+    "prettier:fix": "prettier --write server.js",
+    "lint:check": "eslint server.js",
+    "lint:fix": "eslint --fix server.js"
   },
   "author": "",
   "license": "ISC",
@@ -12,5 +16,9 @@
     "axios": "^1.2.2",
     "express": "^4.18.2",
     "googleapis": "^110.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.32.0",
+    "eslint-plugin-commonjs": "^1.0.2"
   }
 }
