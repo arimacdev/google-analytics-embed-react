@@ -24,4 +24,40 @@ jobs:
       - run: npm run backend_auth:lint:check
       - run: npm run frontend_auth:lint:check
       - run: npm run reactlib:lint:check
-      - run: npm run typeslib:lint:checl
+      - run: npm run typeslib:lint:check
+
+  prettier:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ["16.x"]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install --save-dev
+      - run: npm run backend:prettier:check
+      - run: npm run backend_auth:prettier:check
+      - run: npm run frontend_auth:prettier:check
+      - run: npm run reactlib:prettier:check
+      - run: npm run typeslib:prettier:check
+
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ["16.x"]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install --save-dev
+      - run: npm run reactlib:build
+      - run: npm run backend_auth:build
+      - run: npm run frontend_auth:build
