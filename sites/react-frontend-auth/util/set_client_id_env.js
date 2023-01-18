@@ -1,14 +1,17 @@
-const fs = require("fs");
-const path = require("path");
+const fs = require('fs');
+const path = require('path');
 
-const ENV_FILE = path.resolve(__dirname, "..", ".env");
+const ENV_FILE = path.resolve(__dirname, '..', '.env');
+const KEY_FILE = path.resolve(__dirname, '..', '..', '..', 'oauth_key.json');
 
 if (fs.existsSync(ENV_FILE)) {
   fs.rmSync(ENV_FILE);
 }
 
-const CLIENT_ID = JSON.parse(
-  fs.readFileSync(path.resolve(__dirname, "..", "..", "..", "oauth_key.json"))
-).web.client_id;
+let clientId = 'NOT_PROVIDED';
 
-fs.writeFileSync(ENV_FILE, "REACT_APP_CLIENT_ID=" + CLIENT_ID);
+if (fs.existsSync(KEY_FILE)) {
+  clientId = JSON.parse(fs.readFileSync(KEY_FILE)).web.client_id;
+}
+
+fs.writeFileSync(ENV_FILE, 'REACT_APP_CLIENT_ID=' + clientId);
