@@ -16,8 +16,8 @@
       "email": "whizsid@aol.com"
   },
   "scripts": {
-    "build": "rollup -c --bundleConfigAsCjs",
-    "build:prod": "rollup -c --bundleConfigAsCjs --environment BUILD:production",
+    "build": "rollup -c",
+    "build:prod": "rollup -c --environment BUILD:production",
     "prettier:check": "prettier --check src/*",
     "prettier:fix": "prettier --write src/*",
     "lint:check": "eslint src/*",
