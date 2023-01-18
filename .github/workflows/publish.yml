@@ -17,6 +17,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
   reactlib:
+    needs: [types]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
