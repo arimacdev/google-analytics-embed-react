@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@types/react": "^18.0.26",
-    "@types/react-dom": "^18.0.10",
+    "@types/react": "*",
+    "@types/react-dom": "*",
     "google-analytics-embed-react": "0.0.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "axios": "1.2.2"
+    "react": "*",
+    "react-dom": "*",
+    "axios": "*"
   },
   "devDependencies": {
     "react-scripts": "5.0.1",
