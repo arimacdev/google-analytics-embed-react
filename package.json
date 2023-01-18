@@ -30,7 +30,8 @@
         "backend_auth:build": "npm run build --workspace sites/react-backend-auth",
         "frontend_auth:start": "npm run start --workspace sites/react-frontend-auth",
         "frontend_auth:build": "npm run build --workspace sites/react-frontend-auth",
-        "reactlib:build": "npm run build --workspace packages/google-analytics-embed-react"
+        "reactlib:build": "npm run build --workspace packages/google-analytics-embed-react",
+        "reactlib:build:prod": "npm run build:prod --workspace packages/google-analytics-embed-react"
     },
     "private": true,
     "workspaces": {
