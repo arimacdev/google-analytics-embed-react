@@ -11,9 +11,9 @@
     "url": "git+https://github.com/arimacdev/google-analytics-embed-react.git"
   },
   "author": {
-      "name": "WhizSid",
-      "url": "https://github.com/whizsid",
-      "email": "whizsid@aol.com"
+    "name": "WhizSid",
+    "url": "https://github.com/whizsid",
+    "email": "whizsid@aol.com"
   },
   "scripts": {
     "build": "rollup -c",
@@ -24,6 +24,9 @@
     "lint:fix": "eslint --fix src/*"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-react": "^7.18.6",
+    "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-commonjs": "^24.0.0",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@types/google.visualization": "^0.0.68",
