@@ -2,22 +2,9 @@ name: publish
 on:
   push:
     tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+*'
+      - 'v[0-9]+.[0-9]+.[0-9]+*.react'
 jobs:
-  types:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 16
-          registry-url: 'https://registry.npmjs.org'
-      - run: npm install --save-dev
-      - run: npm publish --workspace packages/google-analytics-embed-types
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
   reactlib:
-    needs: [types]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

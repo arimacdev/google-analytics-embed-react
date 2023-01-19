@@ -20,3 +20,10 @@ backend authentication.
 the frontend authentication.
 
 Please check the whether both examples working before submitting a PR.
+
+## Releases
+
+When you are releasing a new version, NPM packages are automatically
+updating according to your release tag. As an example, if you released a
+tag `v0.0.2.react` github will automatically publish the react library
+to NPM.
