@@ -22,17 +22,17 @@ export default {
   ],
   plugins: [
     typescript(),
-      babel({ 
-          babelHelpers: 'bundled',
-          exclude: 'node_modules/**',
-          extensions: [".js", ".jsx", ".ts", ".tsx"],
-          plugins: [],
-          presets: ["@babel/preset-react", "@babel/preset-env"]
-      }),
     peerDepsExternal(),
     resolve({
       browser: true
     }),
-    commonjs()
+    commonjs(),
+    babel({
+      babelHelpers: 'bundled',
+      exclude: 'node_modules/**',
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      plugins: [],
+      presets: ['@babel/preset-react', '@babel/preset-env']
+    }),
   ]
 };

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import GoogleAnalyticsContext, { GoogleAnalyticsState } from './GoogleAnalyticsContext';
+import equal from 'react-fast-compare';
 
 export type DataChartProps<T> = {
   /** Query */
@@ -33,25 +34,40 @@ class DataChart<O> extends React.Component<DataChartProps<O>> {
   }
 
   componentDidMount(): void {
-    this.componentDidUpdate();
+    this.componentDidUpdate({ query: null } as any);
   }
 
-  componentDidUpdate(): void {
+  componentDidUpdate(prevProps: DataChartProps<O>): void {
     const gaState = this.context as GoogleAnalyticsState;
     const { query, children, style, className, onSuccess, onError, ...chartOptions } = this.props;
     // Rendering the component only if a user authenticated
     if (gaState === 'AUTH_SUCCESS') {
       // Updating the existing chart with new options if already rendered
       if (this.googleDataChart != null) {
-        this.googleDataChart.set({
-          query,
-          chart: {
-            container: this.elementRef.current as HTMLElement,
-            type: this.chartType as any,
-            options: chartOptions as any
-          }
-        });
-        this.googleDataChart.execute();
+        const {
+          query: prevQuery,
+          children: _children,
+          style: _style,
+          className: _className,
+          onSuccess: _onSuccess,
+          onError: _onError,
+          ...prevChartOptions
+        } = prevProps;
+
+        if (
+          prevQuery != null &&
+          (!equal(prevQuery, query) || !equal(prevChartOptions, chartOptions))
+        ) {
+          this.googleDataChart.set({
+            query,
+            chart: {
+              container: this.elementRef.current as HTMLElement,
+              type: this.chartType as any,
+              options: chartOptions as any
+            }
+          });
+          this.googleDataChart.execute();
+        }
       } else {
         // Creating a chart if a chart instance not created
         this.googleDataChart = new gapi.analytics.googleCharts.DataChart({

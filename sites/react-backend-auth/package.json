@@ -5,7 +5,7 @@
   "dependencies": {
     "@types/react": "*",
     "@types/react-dom": "*",
-    "google-analytics-embed-react": "0.0.2",
+    "google-analytics-embed-react": "0.0.3",
     "react": "*",
     "react-dom": "*",
     "axios": "*"

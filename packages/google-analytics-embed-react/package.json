@@ -1,7 +1,7 @@
 {
   "name": "google-analytics-embed-react",
   "description": "Bringing the Google Analytics Embed Components for your ReactJS application",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -10,6 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/arimacdev/google-analytics-embed-react.git"
   },
+  "license": "MIT",
   "author": {
     "name": "WhizSid",
     "url": "https://github.com/whizsid",
@@ -49,5 +50,8 @@
   "peerDependencies": {
     "react": "*",
     "react-dom": "*"
+  },
+  "dependencies": {
+    "react-fast-compare": "^3.2"
   }
 }
